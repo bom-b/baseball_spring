@@ -3,6 +3,7 @@ package com.baseball.service.auth;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
@@ -16,6 +17,9 @@ import java.util.Base64;
 @Slf4j
 public class KakaoService {
 
+    @Value("${vue.base.url}")
+    private String vueBaseURL;
+
 
     // 프론트에서 받은 코드를 통해 카카오 서버로 토큰을 요청
     public ResponseEntity<String> getKakaoToken(String code) {
@@ -27,7 +31,7 @@ public class KakaoService {
         MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
         params.add("grant_type", "authorization_code");
         params.add("client_id", "5503b5836935e429191e7c53ce32baa2");
-        params.add("redirect_uri", "http://localhost:3000/singUp/kakaoJoin");
+        params.add("redirect_uri", vueBaseURL+ "/singUp/kakaoJoin");
         params.add("code", code);
 
         HttpEntity<MultiValueMap<String, String>> kakaoTokenRequest = new HttpEntity<>(params, headers);

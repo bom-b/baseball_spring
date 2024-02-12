@@ -21,7 +21,7 @@ public class BaseballSpringApplication {
 			@Override
 			public void addCorsMappings(CorsRegistry registry) {
 				registry.addMapping("/**")
-					.allowedOrigins("http://localhost:3000/")
+					.allowedOrigins("http://localhost:3000/","https://bulls-and-cows.kr/", "https://www.bulls-and-cows.kr/")
 					.allowedHeaders("*")
 					.allowedMethods("*").allowCredentials(true).maxAge(3600);
 
