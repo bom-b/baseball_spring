@@ -32,9 +32,9 @@ jobs:
       run: chmod +x ./gradlew
       
     # 2-1. Spring Boot 애플리케이션 빌드 전에 application.yml 파일 생성
-    - name: Create application.yml file
+    - name: Create application.properties file
       run: |
-        echo "${{ secrets.APPLICATION_YML }}" > src/main/resources/application.yml
+        echo "${{ secrets.APPLICATION_PROPERTIES }}" > src/main/resources/application.properties
       
     # 2-2. Spring Boot 애플리케이션 빌드
     - name: Build with Gradle
