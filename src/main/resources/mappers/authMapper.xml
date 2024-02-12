@@ -1,0 +1,25 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.baseball.dao.AuthDao">
+    <!--Oauth를 통한 로그인 - 존재하는 회원인지 확인-->
+    <select id="getIdByOauthId" resultType="Int">
+        SELECT id FROM baseball.members WHERE oauth_id = #{oauth_id};
+    </select>
+    <select id="checkNicknameDuplication" resultType="Int">
+        SELECT COUNT(id) FROM baseball.members WHERE nickname = #{nickname};
+    </select>
+    <insert id="singUpWithOauth">
+        insert into baseball.members (with_oauth, oauth_id, nickname)
+        values (#{with_oauth}, #{oauth_id}, #{nickname});
+    </insert>
+    <update id="updateProfileImg">
+        UPDATE baseball.members
+        SET profile_img = #{profile_img}
+        WHERE id = #{id};
+    </update>
+    <select id="getNickname" resultType="String">
+        select nickname from baseball.members where id = #{id};
+    </select>
+    <select id="getProfileImage" resultType="String">
+        select profile_img from baseball.members where id = #{id};
+    </select>
+</mapper>
