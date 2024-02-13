@@ -16,6 +16,7 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
+import java.util.Arrays;
 import java.util.List;
 
 @Configuration
@@ -25,6 +26,9 @@ public class SecurityConfig {
     private final AuthService authService;
     @Value("${jwt.secret}")
     private String secretKey;
+
+    @Value("${cloudflare.ip-ranges}")
+    private String[] ipRanges;
 
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
@@ -56,6 +60,7 @@ public class SecurityConfig {
                         // 그 외의 모든 요청은 토큰이 있어야 접근 가능
                         .anyRequest().authenticated())
                 // JWT 토큰 필터 추가: JwtTokenFilter를 BasicAuthenticationFilter 전에 추가하여 JWT 토큰을 검증
+                .addFilterBefore(new IpFilter(Arrays.asList(ipRanges)), JWTFilter.class)
                 .addFilterBefore(new JWTFilter(authService, secretKey), UsernamePasswordAuthenticationFilter.class)
                 // 세션 정책 설정: SessionCreationPolicy.STATELESS로 설정하여 세션 기반 인증을 사용하지 않도록 한다.
                 .sessionManagement((session) -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
