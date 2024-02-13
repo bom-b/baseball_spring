@@ -30,7 +30,7 @@ public class SecurityConfig {
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration corsConfiguration = new CorsConfiguration();
         corsConfiguration.setAllowCredentials(true);
-        corsConfiguration.setAllowedOrigins(List.of("http://localhost:3000", "https://bulls-and-cows.kr/", "https://www.bulls-and-cows.kr/"));
+        corsConfiguration.setAllowedOrigins(List.of("http://localhost:3000", "https://bulls-and-cows.kr/", "https://www.bulls-and-cows.kr/", "https://www.bulls-and-cows.shop/", "https://bulls-and-cows.shop/"));
         corsConfiguration.setAllowedMethods(List.of("GET", "POST", "OPTIONS"));
 
         corsConfiguration.setAllowedHeaders(List.of("*"));
