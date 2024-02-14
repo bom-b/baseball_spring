@@ -41,6 +41,11 @@ jobs:
       run: |
         echo "${{ secrets.KEYSTORE }}" | base64 --decode > src/main/resources/keystore.p12
 
+    - name: Debug keystore
+      run: |
+        ls -l src/main/resources
+        file src/main/resources/keystore.p12
+
     # 2-3. Spring Boot 애플리케이션 빌드
     - name: Build with Gradle
       uses: gradle/gradle-build-action@bd5760595778326ba7f1441bcf7e88b49de61a25 # v2.6.0
