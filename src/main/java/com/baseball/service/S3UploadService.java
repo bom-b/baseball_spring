@@ -46,6 +46,7 @@ public class S3UploadService {
 
             ObjectMetadata metadata = new ObjectMetadata();
             metadata.setContentType("image/png");
+            metadata.setContentLength(resizedImageBytes.length);
 
             // ByteArrayInputStream을 S3에 업로드합니다.
             amazonS3.putObject(new PutObjectRequest(bucket, fullPath, is, metadata));
