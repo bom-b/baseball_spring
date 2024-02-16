@@ -29,11 +29,11 @@ public class BaseballSpringApplication {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 List<String> origins = new ArrayList<>(Arrays.asList(ipRanges));
-                origins.add("http://localhost:3000/");
-                origins.add("https://bulls-and-cows.kr/");
-                origins.add("https://www.bulls-and-cows.kr/");
-                origins.add("https://bulls-and-cows.shop/");
-                origins.add("https://www.bulls-and-cows.shop/");
+                origins.add("http://localhost:3000");
+                origins.add("https://bulls-and-cows.kr");
+                origins.add("https://www.bulls-and-cows.kr");
+                origins.add("https://bulls-and-cows.shop");
+                origins.add("https://www.bulls-and-cows.shop");
 
                 registry.addMapping("/**")
                     .allowedOrigins(origins.toArray(new String[0]))
