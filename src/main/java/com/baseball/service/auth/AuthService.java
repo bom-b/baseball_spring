@@ -15,7 +15,8 @@ public class AuthService {
     @Value("${jwt.secret}")
     private String secretKey;
 
-    private Long expiredMs = 1000 * 60 * 60L; // 1시간
+    private Long expiredMs = 1000 * 60 * 60 * 24 * 7L; // 액세스 토큰 만료시간 1시간
+    private Long refreshExpiredMs = 1000 * 60 * 60L; // 리프레시 토큰 만료시간 1주
 
     // OauthId를 통해 가입된 회원인지 확인하기
     public Integer checkIdByOauthId(String withOauth, String oauthId) {
