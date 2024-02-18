@@ -4,6 +4,7 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.MalformedJwtException;
 import io.jsonwebtoken.SignatureAlgorithm;
+import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -14,16 +15,13 @@ import java.util.Date;
 @Slf4j
 public class JwtUtil {
 
+    // secretKey를 반환하는 메서드 추가
+    @Getter
     private static String secretKey;
 
     @Value("${jwt.secret}")
     public void setSecretKey(String key) {
         JwtUtil.secretKey = key;
-    }
-
-    // secretKey를 반환하는 메서드 추가
-    public static String getSecretKey() {
-        return secretKey;
     }
 
     // 헤더에서 토큰 추출하는 메서드

@@ -58,7 +58,7 @@ public class MemberController {
     }
 
     // 프로필 업데이트
-    @PostMapping("UpdateProfile")
+    @PostMapping("/UpdateProfile")
     public ResponseEntity<String> UpdateProfile(@RequestParam("nickname") String nickname,
                                                 @RequestParam("imgChangeDefault") String imgChangeDefault,
                                                 @RequestParam(value = "image", required = false) MultipartFile image) {

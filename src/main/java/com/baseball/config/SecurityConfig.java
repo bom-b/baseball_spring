@@ -37,14 +37,15 @@ public class SecurityConfig {
         corsConfiguration.setAllowCredentials(true);
 
         List<String> origins = new ArrayList<>(Arrays.asList(ipRanges));
-        origins.add("http://localhost:3000/");
-        origins.add("https://bulls-and-cows.kr/");
-        origins.add("https://www.bulls-and-cows.kr/");
-        origins.add("https://bulls-and-cows.shop/");
-        origins.add("https://www.bulls-and-cows.shop/");
+        origins.add("http://localhost");
+        origins.add("http://localhost:3000");
+        origins.add("https://bulls-and-cows.kr");
+        origins.add("https://www.bulls-and-cows.kr");
+        origins.add("https://bulls-and-cows.shop");
+        origins.add("https://www.bulls-and-cows.shop");
 
         corsConfiguration.setAllowedOrigins(origins);
-        corsConfiguration.setAllowedMethods(List.of("GET", "POST", "OPTIONS"));
+        corsConfiguration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS", "HEAD", "TRACE", "CONNECT"));
 
         corsConfiguration.setAllowedHeaders(List.of("*"));
         UrlBasedCorsConfigurationSource urlBasedCorsConfigurationSource = new UrlBasedCorsConfigurationSource();
@@ -64,7 +65,7 @@ public class SecurityConfig {
             // .authorizeHttpRequests((auth) -> auth.anyRequest().permitAll())
             .authorizeHttpRequests((auth) -> auth
                 // 토큰 검증을 하지 않을 요청
-                .requestMatchers("/hello", "/auth/**", "/kakao/**", "https://kauth.kakao.com/**", "https://kapi/kakao.com/**")
+                .requestMatchers("/hello", "/auth/**", "/kakao/**", "/game/**", "https://kauth.kakao.com/**", "https://kapi/kakao.com/**")
                 .permitAll()
                 // 그 외의 모든 요청은 토큰이 있어야 접근 가능
                 .anyRequest().authenticated())

@@ -1,0 +1,19 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.baseball.dao.RoomDao">
+    <select id="generateRoomId">
+        select IFNULL(max(room_id), 0) + 1 from baseball.rooms;
+    </select>
+    <insert id="createRoom">
+        insert into baseball.rooms (room_id, room_name, time, player1, head)
+        values (#{newRoomId}, #{room.room_name}, #{room.time}, #{userId}, #{userId});
+    </insert>
+    <select id="getRoomList" resultType="room">
+        select room_id, room_name, time from baseball.rooms;
+    </select>
+    <select id="getRoomByUserId" resultType="room">
+        select room_id, status, room_name, player1, player2, head from rooms where player1 = #{userId} or player2 = #{userId};
+    </select>
+    <delete id="destroyRoom">
+        delete from baseball.rooms where room_id = #{roomId};
+    </delete>
+</mapper>
